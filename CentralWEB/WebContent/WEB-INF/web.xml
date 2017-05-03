@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>CentralWEB</display-name>
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.faces</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Servlet_Email</servlet-name>
+    <servlet-class>com.mb.servlet.EnviaEmail</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Servlet_Email</servlet-name>
+    <url-pattern>/enviaEmail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <servlet-class>com.mb.servlet.UploadFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <url-pattern>/upload.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GerarPdf</servlet-name>
+    <servlet-class> com.mb.servlet.GerarPdfFichas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GerarPdf</servlet-name>
+    <url-pattern>/gerarPdf</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+	    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+	    <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	    <init-param>
+	        <param-name>thresholdSize</param-name>
+	        <param-value>51200</param-value>
+	    </init-param>
+	</filter>
+
+	<context-param>
+	    <param-name>uploadDirectory</param-name>
+	    <param-value>E:/myUploads</param-value>
+	</context-param>
+	
+	<filter-mapping>
+	    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+	    <servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+  
+  
+</web-app>

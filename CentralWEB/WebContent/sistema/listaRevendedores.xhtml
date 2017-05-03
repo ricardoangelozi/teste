@@ -1,0 +1,449 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateSistema2.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{ListaRevendedoresBean}" />
+	</ui:define>
+
+
+	<ui:define name="contents">
+		<h:form id="form">
+
+			<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="section-heading">Cadastro Central</h2>
+							<hr class="primary" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="container pedido">
+
+				<div class="row">
+					<h4 class="formLine">Cadastro Central</h4>
+				</div>
+
+				<div class="row">
+					<div class="column column-2">
+						<label style="width: 100%">Data Inicio:</label>
+						<p:calendar locale="pt" requiredMessage="teste" id="dateInicio"
+							value="#{mb.filtro.dateInicio}" />
+					</div>
+					<div class="column column-2">
+						<label style="width: 100%">Data Final:</label>
+						<p:calendar locale="pt" id="dateFim" value="#{mb.filtro.dateFim}" />
+
+					</div>
+					
+					<div class="column column-2">
+						<label style="width: 100%">Tipo de Cadastro</label>
+						<p:selectOneMenu id="selTpCadastro" value="#{mb.tipoCadastroSelecionado}" label="TIPO CADASTRO" required="true" requiredMessage="Tipo de Cadastro obrigatorio" >
+							<p:ajax listener="#{mb.carregarStatus()}" update="selStatus" />
+							<f:selectItem itemLabel="SELECIONE" noSelectionOption="true" />
+							<f:selectItem itemLabel="CATALOGO" itemValue="CATALOGO" />
+							<f:selectItem itemLabel="REVENDEDORA" itemValue="REVENDEDORA" />
+			 			</p:selectOneMenu>
+					</div>
+					
+					<div class="column column-2">
+						<label style="width: 100%">Status</label>
+						<p:selectOneMenu id="selStatus" value="#{mb.filtro.statusSelecionado}"  label="SELECIONE STATUS" converter="selectItensMenu" items="#{mb.listaStatus}" panelStyle="width:250px" >
+							<f:selectItem itemLabel="SELECIONE" noSelectionOption="true" />
+							<f:selectItems value="#{mb.listaStatus}" var="listaS"  itemLabel="#{listaS.descricao}" itemValue="#{listaS}" />
+						</p:selectOneMenu>
+					</div>
+					
+					<div class="column column-2" >
+						<label style="width: 100%">Documentos OK ?</label>
+						<h:selectBooleanCheckbox value="#{mb.filtro.documento}"   />
+					</div>
+					
+					
+				</div>
+				
+				
+					
+					<h:commandButton  value="BUSCAR" id="busca" styleClass="btnCentral" actionListener="#{mb.buscarData()}"	style="margin-left:10px;"  />
+				
+
+				<div >
+					
+				</div>
+				
+				<div class="row">
+					<div class="column column-4">
+						<label style="width: 100%">Nome</label>
+						<p:inputText name="buscaNome" style="width: 100%" id="buscaNome"  value="#{mb.filtro.nome}"  maxlength="50" />
+					</div>
+					
+					<div class="column column-4">
+						<label style="width: 100%">Email</label>
+						<p:inputText name="buscaEmail" style="width: 100%" id="buscaEmail"  value="#{mb.filtro.email}"  maxlength="50" />
+					</div>
+					
+					<div class="column column-2">
+						<label style="width: 100%">CPF</label>
+						<p:inputMask type="text"  name="cpf" id="cpf" mask="999.999.999-99" value="#{mb.filtro.nrCpf}"  maxlength="14" />
+					</div>
+				
+				</div>
+				
+
+
+				<div class="alinhaBtn">
+					<h:commandButton value="BUSCAR CPF" id="buscaCpf"
+						styleClass="btnCentral"
+						actionListener="#{mb.buscaCpf(mb.filtro.nrCpf)}"
+						style="margin-left:10px;" />
+				</div>
+
+			</div>
+
+			<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+
+						<p:dataTable var="listaCadastro" value="#{mb.listaCadastro}" rendered="#{mb.listaCadastro != null}"
+							widgetVar="cadastroTabela" emptyMessage="Lista Vazia"
+							filteredValue="#{mb.filterlistaCadastro}" rows="10"
+							paginator="true" rowsPerPageTemplate="5,10,15">
+
+							<p:column headerText="N° CADASTRO">
+								<h:outputText value="#{listaCadastro.id}" id="idCadastro" />
+							</p:column>
+
+							<p:column headerText="NOME">
+								<h:outputText value="#{listaCadastro.nome}" />
+							</p:column>
+
+							<p:column headerText="DATA CADASTRO">
+								<h:outputText value="#{listaCadastro.data}" >
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="SITUAÇÃO" filterMatchMode="lte">
+								<h:outputText value="#{listaCadastro.andamento.descricao}" />
+							</p:column>
+
+							<p:column headerText="TIPO" filterMatchMode="lte">
+								<h:outputText value="#{listaCadastro.tipo}" />
+							</p:column>
+							<p:column style="width:32px;text-align: center">
+								<p:commandButton update=":form" icon="ui-icon-search" title="View" action="#{mb.carregarPedidos}">
+									<f:setPropertyActionListener value="#{listaCadastro}" target="#{mb.cadastroSel}" ></f:setPropertyActionListener>
+								</p:commandButton>
+							</p:column>
+							
+							<p:column style="width:32px;text-align: center">
+								<p:commandButton value="Imprimir"  ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+									<f:setPropertyActionListener value="#{listaCadastro}" target="#{mb.cadastroSel}" ></f:setPropertyActionListener>
+        							<p:fileDownload value="#{mb.file}" />
+    							</p:commandButton>
+							</p:column>
+
+						</p:dataTable>
+
+						<p:outputPanel id="cadastroDetail" style="margin-top: 30px;" rendered="#{mb.cadastroSel != null}">
+							<p:tabView>
+								<p:tab title="Dados Cadastrais">
+									<div class="row">
+										<div class="column column-6">
+											<label style="width: 100%">Nome</label>
+											<p:inputText id="nome_completo"
+												value="#{mb.cadastroSel.nome}"
+												placeholder="Digite seu nome completo"
+												styleClass="form-control" />
+										</div>
+										<div class="column column-4">
+											<label style="width: 100%">E-mail</label>
+											<p:inputText type="email" name="email" id="email"
+												value="#{mb.cadastroSel.email}" styleClass="form-control" />
+										</div>
+										<div class="column column-2">
+											<label style="width: 100%">Rg</label>
+											<p:inputText type="text" name="rg" id="rg" maxlength="10"
+												styleClass="form-control" value="#{mb.cadastroSel.rg}" />
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="column column-2">
+											<label style="width: 100%">CPF</label>
+											<p:inputMask type="text" name="cpf" id="cpf"
+												styleClass="form-control" mask="999.999.999-99"
+												value="#{mb.cadastroSel.cpf}" />
+										</div>
+										<div class="column column-2">
+											<label style="width: 100%">Sexo</label>
+											<p:selectOneMenu id="sexo" value="#{mb.cadastroSel.sexo}"
+												style="widht:100%;">
+												<f:selectItem itemLabel="Escolha" itemValue=""
+													noSelectionOption="" />
+												<f:selectItem itemLabel="M" itemValue="M" />
+												<f:selectItem itemLabel="F" itemValue="F" />
+											</p:selectOneMenu>
+										</div>
+										<div class="column column-2">
+											<label style="width: 100%">Data de Nascimento</label>
+											<p:calendar locale="pt" id="dataNasc" value="#{mb.cadastroSel.nascimento}" >
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</p:calendar>
+										</div>
+										
+										<div class="column column-2">
+											<label style="width: 100%">Telefone Residencial</label>
+											<p:inputMask id="tel_res" value="#{mb.cadastroSel.foneRes}" mask="(99) 9999-9999" />
+										</div>
+										
+										<div class="column column-2">
+											<label style="width: 100%">Telefone Comercial</label>
+											<p:inputMask id="tel_com" value="#{mb.cadastroSel.foneCom}" mask="(99) 9999-9999" />
+										</div>
+										
+										<div class="column column-2">
+											<label style="width: 100%">Telefone Celular</label>
+											<p:inputMask id="tel_cel" value="#{mb.cadastroSel.foneCel}" mask="(99) 9.9999-9999" />
+										</div>
+									</div>
+									
+									<div class="row">
+										
+										
+										
+									</div>
+								</p:tab>
+
+								<p:tab title="Endereço" id="tabDados">
+									<div class="row">
+										<div class="column column-2">
+											<label style="width: 100%">Cep</label>
+											<p:inputMask id="cep" mask="99999-999" value="#{mb.cadastroSel.cep}" />
+										</div>
+										<div class="column column-6">
+											<label style="width: 100%">Endereço</label>
+											<p:inputText type="text" name="endereco" id="endereco" 
+													 styleClass="form-control" value="#{mb.cadastroSel.rua}" />
+										</div>
+										<div class="column column-2">
+											<label style="width: 100%">Número</label>
+											<p:inputText type="number" name="number" id="number"
+													styleClass="form-control" value="#{mb.cadastroSel.numero}" />
+										</div>
+										
+										<div class="column column-2">
+											<label style="width: 100%">Complemento</label>
+											<p:inputText type="text" name="complemento" id="complemento" value="#{mb.cadastroSel.complemento}" />
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="column column-3">
+											<label style="width: 100%">Cidade</label>
+											<p:inputText type="text" name="cidade" id="cidade" value="#{mb.cadastroSel.cidade}" />
+										</div>
+										
+										<div class="column column-3">
+											<label style="width: 100%">Estado</label>
+											<p:inputText type="text" name="estado" id="estado" value="#{mb.cadastroSel.estado}" />
+										</div>
+										
+										<div class="column column-3">
+											<label style="width: 100%">Bairro</label>
+											<p:inputText type="text" name="bairro" id="bairro" value="#{mb.cadastroSel.bairro}" />
+										</div>
+										
+										<div class="column column-3">
+											<label style="width: 100%">Referência</label>
+											<p:inputText type="text" name="referecia" id="referecia" value="#{mb.cadastroSel.referencia}" />
+										</div>
+									</div>
+								</p:tab>
+
+								<p:tab title="Pedidos">
+									<div class="row">
+										<div class="column column-12">
+											
+												<p:dataTable var="listaPedido"
+												value="#{mb.listaPedidoProduto}" widgetVar="cadastroPedido"
+												emptyMessage="Não ha pedidos" rows="150">
+
+												<p:column headerText="QTD">
+													<h:outputLabel value="#{listaPedido.qtde}" />
+												</p:column>
+												<p:column headerText="Descrição">
+													<h:outputLabel value="#{listaPedido.tbProcad.prodescri}" />
+												</p:column>
+
+												<p:column headerText="Referencia">
+													<h:outputLabel value="#{listaPedido.tbProcad.proref}" />
+												</p:column>
+
+												<p:column headerText="Tamanho">
+													<h:outputText value="#{listaPedido.tbProcad.protam}" />
+												</p:column>
+												<p:column headerText="Pagina">
+													<h:outputText value="#{listaPedido.tbProcad.propag}" />
+												</p:column>
+
+												<p:column headerText="Preco UNI.">
+													<h:outputText value="#{listaPedido.tbProcad.propreuni1}" />
+												</p:column>
+
+												<p:column headerText="Qtde X Preço">
+													<h:outputText
+														value="#{listaPedido.tbProcad.valorTotalItens}" />
+												</p:column>
+											</p:dataTable>
+										
+										</div>
+									</div>
+								</p:tab>
+
+								<p:tab title="Historico">
+									<div class="row">
+										<div class="column column-12">
+											
+												<p:dataTable var="listaHistorico" value="#{mb.cadastroSel.listHistorico}" widgetVar="hisotricoPedido" emptyMessage="Não ha Registros" rows="30">
+
+												<p:column headerText="DATA">
+													<h:outputLabel value="#{listaHistorico.dataAlteracao}" >
+														<f:convertDateTime pattern="dd/MM/yyyy" />
+													</h:outputLabel>
+												</p:column>
+												<p:column headerText="Descrição">
+													<h:outputLabel value="#{listaHistorico.dsObservacao}" />
+												</p:column>
+
+												<p:column headerText="Usuario">
+													<h:outputLabel value="#{listaHistorico.usuario.dsLogin}" />
+												</p:column>
+											</p:dataTable>
+										</div>
+									</div>
+								</p:tab>
+
+								<p:tab title="Status">
+									
+									<div class="row">
+										<div class="column column-2">
+											<label style="width: 50%">STATUS</label>
+											
+											<h:selectOneMenu id="selTpStatusCatalogo" value="#{mb.cadastroSel.andamento}" label="STATUS" converter="selectItensMenu" items="#{mb.listaStatusCatalogo}"  rendered="#{mb.cadastroSel.tipo == 'CATALOGO'}">
+												<f:selectItem itemLabel="#{mb.cadastroSel.andamento.descricao}" noSelectionOption="true"/>
+												<f:selectItems value="#{mb.listaStatusCatalogo}" var="listaStatusCatalogo" itemLabel="#{listaStatusCatalogo.descricao}"  itemValue="#{listaStatusCatalogo}"/>
+			 								</h:selectOneMenu>
+			 								
+			 								
+			 								<h:selectOneMenu id="selTpStatus" value="#{mb.cadastroSel.andamento}" label="STATUS" converter="selectItensMenu" items="#{mb.listaStatusRevendedora}"  rendered="#{mb.cadastroSel.tipo == 'REVENDEDORA'}">
+												<f:selectItem itemLabel="#{mb.cadastroSel.andamento.descricao}" noSelectionOption="true"/>
+												<f:selectItems value="#{mb.listaStatusRevendedora}" var="listaStatusRevendedora" itemLabel="#{listaStatusRevendedora.descricao}"  itemValue="#{listaStatusRevendedora}"/>
+			 								</h:selectOneMenu>
+			 								
+										</div>
+									</div>
+									<div class="row">
+										<div class="column column-4">
+											<label style="width: 50%">Enviar Catalogo ?</label>
+											<h:selectBooleanCheckbox value="#{mb.cadastroSel.malaDireta}" />
+										</div>
+										
+										<div class="column column-4">
+											<label style="width: 50%">Catalogo Enviado !</label>
+											<h:selectBooleanCheckbox value="#{mb.cadastroSel.catalogoEnvioStatus}"  disabled="true"/>
+										</div>
+										
+										<div class="column column-4">
+											<label style="width: 50%">Data de Envio !</label>
+											<h:outputLabel value="#{mb.cadastroSel.catalogoEnvio}" >
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</h:outputLabel>
+										</div>
+									</div>
+								</p:tab>
+
+								<p:tab title="Documentos" rendered="#{mb.cadastroSel.tipo == 'REVENDEDORA'}">
+								<div class="row">
+									<div class="column column-4">
+										<label style="width: 50%">Documentos Aprovados</label>
+										<h:selectBooleanCheckbox value="#{mb.cadastroSel.documentoEnvio}"  />
+									</div>
+								</div>
+								
+									<div class="row">
+										<div class="column column-12">
+											<p:dataTable var="listaDocs" value="#{mb.cadastroSel.listDocumentos}"
+											widgetVar="Uploaders Docs" emptyMessage="Não ha Documentos" 	rows="10">
+	
+											<p:column headerText="DATA ENVIO">
+												<h:outputLabel value="#{listaDocs.dataEnvio}" >
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</h:outputLabel>
+											</p:column>
+											<p:column headerText="Tipo de Arquivo" >
+	
+												<h:inputText value="#{listaDocs.docCad}" maxlength="12" disabled="#{mb.cadastroSel.documentoEnvio}"/>
+											</p:column>
+	
+											<p:column headerText="APROVADO">
+												<h:selectBooleanCheckbox value="#{listaDocs.aprovado}" disabled="#{mb.cadastroSel.documentoEnvio}"/>
+	
+												
+											</p:column>
+	
+											<p:column headerText="">
+												<h:commandButton value="DOWNLOAD" styleClass="btnCentral"
+													action="#{mb.downloadDocumentos(listaDocs)}" disabled="#{mb.cadastroSel.documentoEnvio}" />
+												
+												<p:commandButton value="EXCLUIR" styleClass="btnCentral"
+													action="#{mb.excluirDocumentos(listaDocs)}" ajax="true"
+													update="@form" oncomplete="PF('cadastroDialog').show()" disabled="#{mb.cadastroSel.documentoEnvio}" />
+											</p:column>
+											</p:dataTable>
+										</div>
+									</div>
+								</p:tab>
+							</p:tabView>
+
+
+							
+								<div class="column-12 descAtend">
+									<label for="campoAtendimento">Descrição Atendimento:</label>
+									<h:inputTextarea value="#{mb.dsObservacao}" label="campoAtendimento" rows="5" cols="400" />
+									<p:commandButton value="SALVAR" styleClass="btnCentral" actionListener="#{mb.salvar(mb.cadastroSel)}" ajax="true" update="form">
+										<p:confirm header="Confirmação" message="Deseja salvar as alterações ?" icon="ui-icon-alert" />
+									</p:commandButton>
+									
+									<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+								        <p:commandButton value="SIM" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								        <p:commandButton value="NÃO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								    </p:confirmDialog>
+									
+								</div>
+							
+							
+						</p:outputPanel>
+
+					</div>
+				</div>
+			</section>
+		</h:form>
+		<script type="text/javascript">
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
+</script>
+	</ui:define>
+</ui:composition>

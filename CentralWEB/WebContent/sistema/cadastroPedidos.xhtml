@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateMorador.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroMoradorBean}" />
+	</ui:define>
+
+	<ui:define name="contents">
+
+		<h:form id="formPedidos" prependId="false">
+
+			<section id="cadastroPedido">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 text-center">
+				        	<h2 class="section-heading">Primeiro Pedido</h2>
+				            <hr class="primary" />
+				            <p>Obs.: Para que seu pedido seja completado é necessário o envios dos documentos e a assinatura da ficha cadastral.</p>
+				         </div>
+				     </div>
+				</div>
+			</section>
+			
+			<section id="cadastroPedidoProdutos">
+				<div class="container">
+					<h3 class="section-heading">Primeiro Pedido</h3>
+				    <hr class="primary2" />
+					
+					<div class="row">
+				    	<div class="col-lg-8">
+				        	<p>Nome executiva: <input type="text" style="width: 75%;"/></p> 
+				        </div>
+				        <div class="col-lg-4">
+				        	<p>Limite de Crédito: <input type="text" /></p>
+				        </div>
+				     </div>
+				     <div class="row">
+				    	<div class="col-lg-4">
+				        	<p>Crédito Utilizado: <input type="text" width="100%"/></p> 
+				        </div>
+				        <div class="col-lg-4">
+				        	<p>Crédito Disponível: <input type="text" /></p>
+				        </div>
+				        <div class="col-lg-4">
+				        	<p>Qtde de Itens: <input type="text" /></p>
+				         </div>
+				     </div>
+				</div>
+			</section>
+			
+			<section id="cadastroPedidoProdutos">
+				<div class="container">
+					<h3 class="section-heading">Itens Pedido</h3>
+				    <hr class="primary2" />
+					
+					<div class="row">
+				    	 <table class="table">
+						    <thead>
+						      <tr>
+						        <th style="max-width: 8%;">Item</th>
+						        <th style="max-width: 8%;">Ref.</th>
+						        <th style="max-width: 8%;">Tam</th>
+						        <th style="max-width: 8%;">Qtde</th>
+						        <th style="max-width: 8%;">Descrição</th>
+						        <th style="max-width: 8%;">Pág</th>
+						        <th style="max-width: 8%;">Pr Unit. R$</th>
+						        <th style="max-width: 8%;">Pr Total R$</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						      <tr>
+						        <td>1</td>
+						        <td>30235625</td>
+						        <td>G</td>
+						        <td>5</td>
+						        <td>Descrição do produto lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum .</td>
+						        <td>2</td>
+						        <td>R$10,99</td>
+						        <td>85,90</td>
+						      </tr>
+						      <tr>
+						         <td>2</td>
+						        <td>30235625</td>
+						        <td>G</td>
+						        <td>5</td>
+						        <td>Descrição do produto lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum.</td>
+						        <td>2</td>
+						        <td>R$10,99</td>
+						        <td>85,90</td>
+						      </tr>
+						      <tr>
+						        <td>3</td>
+						        <td>30235625</td>
+						        <td>G</td>
+						        <td>5</td>
+						        <td>Descrição do produto lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum.</td>
+						        <td>2</td>
+						        <td>R$10,99</td>
+						        <td>85,90</td>
+						      </tr>
+						    </tbody>
+						  </table>
+				   </div>
+				</div>     
+			</section>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

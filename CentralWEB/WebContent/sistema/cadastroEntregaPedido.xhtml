@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateSistema2.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroEntregaPedidoBean}" />
+	</ui:define>
+	
+	<ui:define name="contents">
+	<h:form id="form">
+		<section id="cadastroDataPedido">
+				<div class="container">
+				
+				<h2 class="section-heading">Incluir datas de fechamento </h2>
+	            <hr class="primary" />
+				            
+				    <div class="row">       
+					<div class="column2 column2-3">
+						<label style="width: 100%">Estado</label>
+						<h:outputLabel id="Estado" value="#{mb.selEstadoData.dsCidade}" maxlength="10" />
+					</div>
+					<div class="column2 column2-3">
+						<label style="width: 100%">Entrada do Pedido</label>
+						<p:inputText id="EntradaPedido" value="#{mb.selEstadoData.entradaPedido}" maxlength="10" />
+					</div>
+					<div class="column2 column2-3">
+						<label style="width: 100%">Entrega da Caixa:</label>
+						<p:inputText id="EntregaCaixa" value="#{mb.selEstadoData.entregaCaixa}" maxlength="10" />
+					</div>
+					
+					<div class="column2 column2-3">
+						<label style="width: 100%">Boleto de Pagamento:</label>
+						<p:inputText id="boletoPagamento" value="#{mb.selEstadoData.boletoPagamento}" styleClass="form-control"   maxlength="10" />
+					</div>
+					</div>
+					
+					<div class="row">
+						<div class="column2 column2-12">
+							<h:commandButton action="#{mb.cadastrar(mb.selEstadoData)}" value="GRAVAR" styleClass="btnCentral" />
+						</div>	    
+					</div>
+					
+					<div class="row">
+				    	<div class="col-lg-12 ">
+				        	<p:dataTable var="estadoData" value="#{mb.listaEstadoData}" widgetVar="cadastroEstados" emptyMessage="Lista Vazia"  rows="10" paginator="true">
+								<p:column headerText="Cidade">
+									<h:outputText value="#{estadoData.dsCidade}" id="idCadastro" />
+								</p:column>
+	
+								<p:column headerText="Entrada do Pedido">
+									<h:outputText value="#{estadoData.entradaPedido}" />
+								</p:column>
+	
+								<p:column headerText="Entrega da Caixa">
+									<h:outputText value="#{estadoData.entregaCaixa}" />
+								</p:column>
+	
+								<p:column headerText="Boleto de Pagamento" filterMatchMode="lte">
+									<h:outputText value="#{estadoData.boletoPagamento}" />
+								</p:column>
+	
+								<p:column style="width:32px;text-align: center">
+									<p:commandButton update="@form"  icon="ui-icon-search" title="View" >
+										<f:setPropertyActionListener value="#{estadoData}" target="#{mb.selEstadoData}"  />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+				         </div>
+				     </div>
+				</div>
+		</section>
+		  <!-- LINHA 1 FORMULARIO PEDIDO CENTRAL -->
+		  <div class="container pedido">
+		  
+				
+		  
+		  
+		</div>
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

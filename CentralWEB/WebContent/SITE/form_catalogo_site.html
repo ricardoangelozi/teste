@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Central da Revendedora</title>
+
+    <!--Google web fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,700,600italic,200,200italic' rel='stylesheet' type='text/css'>    
+    <link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
+    
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+
+    <!-- font awesome-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/skillset.css">
+
+
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css"> 
+    <link rel="stylesheet" type="text/css" href="css/owl.transitions.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.theme.css">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--preloader-->
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div> 
+
+<header class="main_header">
+  <div class="row">
+    <div class="content"> <a class="logo" href="index.jsp"><img src="img/logo.png" alt="" width="100%"></a>
+      <div class="mobile-toggle"> <span></span> <span></span> <span></span></div>
+      <nav>
+        <ul class="main_menu">
+          <li><a href="index.jsp">Serviços</a></li>
+          <li><a href="index.jsp">Faça Parte</a></li>
+          <li><a href="index.jsp">Catálogos</a></li>
+          <li><a href="index.jsp">Pedido</a></li>
+          <li><a href="index.jsp">Contato</a></li>                    
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- END row --> 
+</header>
+
+
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="2000" id="bs-carousel">
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
+  
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="slide-1"></div>
+      <div class="hero">
+        <hgroup>
+            <h1>Central da <span>Revendedora</span></h1>        
+            <h3>Alcançe todos os seus objetivos profissionais.</h3>
+        </hgroup>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-2"></div>
+      <div class="hero">        
+        <hgroup>
+            <h1> História e <span> Tradição</span></h1>        
+            <h3>Mais de 30 anos no mercado</h3>
+        </hgroup>       
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-3"></div>
+      <div class="hero">        
+        <hgroup>
+            <h1>Seja uma <span>Revendedora</span></h1>        
+            <h3>A chance de alcançar sua realização profissional</h3>
+        </hgroup>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateLogin.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroCatalogoBean}" />
+	</ui:define>
+	
+
+	<ui:define name="contents">
+	<h:form id="form">
+
+		<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 text-center">
+				        	<h2 class="section-heading">Cadastro Central</h2>
+				            <hr class="primary" />
+				         </div>
+				     </div>
+				</div>
+		</section>
+		
+		
+		<section id="cadastroEntregas">
+			<div class="container">	
+					<div class="col-md-6 col-lg-6 col-sm-6 col-xm-6">
+						
+						<div class="form-group">
+						  <label>Nome Completo</label>
+						  <p:inputText id="nome_completo" placeholder="Dom Pedro II" value="#{mb.cadastro.nome}" styleClass="form-control" />
+						</div>
+						
+						
+						
+						<div class="form-group">
+						  <label>E-mail</label>
+						  <p:inputText type="email" name="email" id="email" placeholder="pedro@caravelas.com" 
+						  		value="#{mb.cadastro.email}" styleClass="form-control"/>
+						</div>
+					
+				    	<div class="form-group">
+							<label>Rg</label>
+							<p:inputText type="text" name="rg" id="rg" maxlength="10" styleClass="form-control"  value="#{mb.cadastro.rg}"/>
+						</div>
+						
+						<div class="form-group">
+							<label>Cpf</label>
+							<p:inputMask type="text" name="cpf" id="cpf" placeholder="Apenas números..." styleClass="form-control" 
+								mask="999.999.999-99" value="#{mb.cadastro.cpf}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>SEXO</label>
+						  <p:selectOneMenu id="sexo" value="#{mb.cadastro.sexo}" styleClass="form-control" style="width:100%;">
+					            <f:selectItem itemLabel="Escolha" itemValue="" noSelectionOption="" />
+					            <f:selectItem itemLabel="M" itemValue="M" />
+					            <f:selectItem itemLabel="F" itemValue="F" />
+					        </p:selectOneMenu>
+						</div>
+					   	
+					   	<div class="form-group">
+							<label>Data de Nascimento</label>
+							<p:calendar locale="pt" id="dataNasc" value="#{mb.cadastro.nascimento}" />
+						</div>
+						
+						<div class="form-group">
+							<label>Telefone Residencial</label>
+						<p:inputMask id="tel_res" value="#{mb.cadastro.foneRes}" mask="(99) 9999-9999"/>
+						</div>
+						
+						<div class="form-group">
+							<label>Telefone Comercial</label>
+						<p:inputMask id="tel_com" value="#{mb.cadastro.foneCom}" mask="(99) 9999-9999"/>
+						</div>
+						
+						<div class="form-group">
+							<label>Telefone Celular</label>
+						<p:inputMask id="tel_cel" value="#{mb.cadastro.foneCel}" mask="(99) 9.9999-9999"/>
+						</div>
+						
+						
+						
+						</div>
+						<div class="col-md-6 col-lg-6 col-sm-6 col-xm-6">
+						
+						<div class="form-group">
+							<label>Cep</label>
+							<p:inputMask id="cep" mask="99999-999" styleClass="form-control" value="#{mb.cadastro.cep}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Endereço</label>
+						  <p:inputText type="text" name="endereco" id="endereco" placeholder="Rua da Canoa Larga" styleClass="form-control" value="#{mb.cadastro.rua}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Número</label>
+						  <p:inputText type="number" name="number" id="number"  styleClass="form-control" value="#{mb.cadastro.numero}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Bairro</label>
+						  <p:inputText type="text" name="bairro" id="bairro" styleClass="form-control" value="#{mb.cadastro.bairro}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Cidade</label>
+						  <p:inputText type="text" name="cidade" id="cidade" styleClass="form-control" value="#{mb.cadastro.cidade}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Estado</label>
+						  <p:inputText type="text" name="estado" id="estado" styleClass="form-control"  value="#{mb.cadastro.estado}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Complemento</label>
+						  <p:inputText type="text" name="complemento" id="complemento" styleClass="form-control" value="#{mb.cadastro.complemento}"/>
+						</div>
+						
+						<div class="form-group">
+						  <label>Referência</label>
+						  <p:inputText type="text" name="referecia" id="referecia" styleClass="form-control" value="#{mb.cadastro.referencia}"/>
+						</div>
+						
+						 <div class="form-group">
+						  <label>Como conheceu a central?</label>
+						  	<p:selectOneMenu id="conheceu" value="#{mb.cadastro.conheceu}" styleClass="form-control" style="width:100%;">
+					            <f:selectItem itemLabel="Escolha a forma" itemValue="" />
+					            <f:selectItem itemLabel="Amigos" itemValue="Amigos" />
+					            <f:selectItem itemLabel="Indicação" itemValue="Indicação" />
+					            <f:selectItem itemLabel="Catálogo" itemValue="Catálogo" />
+					            <f:selectItem itemLabel="Televisão" itemValue="Televisão" />
+					            <f:selectItem itemLabel="Radio" itemValue="Radio" />
+					            <f:selectItem itemLabel="Google" itemValue="Google" />
+					            <f:selectItem itemLabel="Facebook" itemValue="Facebook" />
+					            <f:selectItem itemLabel="Telefone" itemValue="Telefone" />
+					            <f:selectItem itemLabel="Outros" itemValue="Outros" />
+					        </p:selectOneMenu>
+						  	
+						</div> 
+						
+						
+						<div class="form-group">
+						  <label>Deseja receber e-mail?</label>
+						  <input type="checkbox" name="correnteEmail" id="correnteEmail" style="height: auto;" value="#{mb.cadastro.newsletter}"/>
+						</div>
+						
+						
+				
+					</div>
+					<p:commandButton value="Enviar Dados"	actionListener="#{mb.enviarDados(mb.cadastro)}" styleClass="btn btn-default" style="margin-bottom: 10px;"/>
+					
+				</div>
+		</section>
+		
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+
+
+<div class="contact_area">
+  <div class="container">
+    <div class="row">
+      <div class="contact_section">
+          <h2>Fale Conosco</h2>
+          <p>Envie suas dúvidas, criticas, sugestões e informações conforme assuntos relacionados nos itens do formulário abaixo.</p>
+
+                    <div class="col-md-6">
+                        <div class="contact_form">
+                        <fieldset id="contact_form">
+                            <div id="result"></div>
+                                <label for="name">
+                                <input type="text" name="name" id="name" placeholder="Nome" />
+                                </label>
+                                
+                                <label for="email">
+                                <input type="email" name="email" id="email" placeholder="E-mail" />
+                                </label>
+                                
+                                <label for="phone">
+                                <input type="text" name="phone" id="phone" placeholder="Telefone" />
+                                </label>
+                                
+                                <label for="assunto">
+                                <select>
+                                 <option value="Dúvidas">Dúvidas</option>
+                                  <option value="Críticas">Críticas</option>
+                                   <option value="Sugestões">Sugestões</option>
+                                    <option value="Quero Comprar">Quero Comprar</option>
+                                     <option value="Quero Revender">Quero Revender</option>
+                                </select>
+                                </label>
+                                                                
+                                <label for="message">
+                                <textarea name="message" id="message" placeholder="Digite sua mensagem"></textarea>
+                                </label>
+                                <button class="submit_btn" id="submit_btn">Submit</button>
+                                
+                                </label>
+                        </fieldset>                           
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="contact_text">
+                            <h3>CONTATO</h3>
+                            <ul class="contact_info">
+                                <li>contato@centraldarevendedora.com.br</li>
+                                <li>11 3297-5252 (São Paulo)</li>
+                                <li>21 4062-7605 (Rio de Janeiro) </li>
+                                <li>31 4062-7544 (Minas Gerais)</li>
+                                <li>27 4062-9170 (Espirito Santo)</li>
+                            </ul>
+                            <h3>Mídias</h3>
+                            <ul class="contact_social">
+                                <a href="https://www.facebook.com/hiroshimacatalogo" target="_blank"><li><i class="fb fa fa-facebook-square"></i></li></a>
+                                <a href="#"><li><i class="tw fa fa-twitter-square"></i></li></a>
+                                <a href="#"><li><i class="gp fa fa-google-plus-square"></i></li></a>
+                            </ul>                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="contact_text_rodape">
+                            <span>Central da Revendedora © 2012 Todos Direitos Reservados - Fotos e textos sob responsabilidade do cliente.</span>
+                        </div>
+                    </div>
+                    
+                    
+                    
+      </div>
+    </div>
+  </div> 
+</div><!-- contact area end   -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script src="js/wow.js"></script>
+
+    <script src="js/jquery.nicescroll.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.easing.min.js"></script>  
+    <script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+
+   <script src="js/skillset.js"></script>
+
+   <script src="js/owl.carousel.js"></script> 
+
+
+   <script src="js/scrollupto.js"></script>
+   <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

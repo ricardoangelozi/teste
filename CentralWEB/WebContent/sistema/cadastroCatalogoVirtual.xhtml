@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateSistema2.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroCatalogoVirtualBean}" />
+	</ui:define>
+	
+	<ui:define name="contents">
+	<h:form id="form">
+		<section id="cadastroDataPedido">
+				<div class="container">
+				
+				<h2 class="section-heading">Incluir catalogos Virtuais </h2>
+	            <hr class="primary" />
+				            
+				    <div class="row">       
+					<div class="column2 column2-3">
+						<label style="width: 100%">URL CATALOGO</label>
+						<p:inputText id="urlCatalogo" value="#{mb.catalogo.catUrl}"  />
+					</div>
+					<div class="column2 column2-3">
+						<label style="width: 100%">Nome Catalogo</label>
+						<p:inputText id="idNomeCompleto" value="#{mb.catalogo.catNome}" maxlength="30" />
+					</div>
+					<div class="column2 column2-3">
+						<label style="width: 100%">Campanha:</label>
+						<p:inputText id="idCampanha" value="#{mb.catalogo.catNomeCatalogo}" maxlength="30" />
+					</div>
+					
+					<div class="column2 column2-3">
+						<label style="width: 100%">Foto:</label>
+						
+						<h:outputLabel value="#{mb.catalogo.catPhoto}" rendered="#{mb.catalogo.catPhoto != null}"></h:outputLabel>
+						<p:fileUpload fileUploadListener="#{mb.handleFileUpload}" mode="advanced" dragDropSupport="false"  
+                       sizeLimit="100000" fileLimit="1" update="form" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  rendered="#{mb.catalogo.catPhoto == null}"/> 
+ 						
+						
+						
+					</div>
+					</div>
+					
+					<div class="row">
+						<div class="column2 column2-12">
+							<p:commandButton action="#{mb.cadastrar(mb.catalogo)}" value="GRAVAR" styleClass="btnCentral" update="listaCatalogosGrav" />
+						</div>	    
+					</div>
+					
+					<div class="row">
+				    	<div class="col-lg-12 ">
+				        	<p:dataTable var="listaCatalogo" value="#{mb.listaCatalogo}" widgetVar="cadastroCatalogo" emptyMessage="Lista Vazia"  rows="15" id="listaCatalogosGrav" >
+								
+								<p:column headerText="URL">
+									<h:outputText value="#{listaCatalogo.catUrl}" id="idUrl" />
+								</p:column>
+								
+								<p:column headerText="NOME">
+									<h:outputText value="#{listaCatalogo.catNome}" id="idNome" />
+								</p:column>
+								
+								<p:column headerText="NOME CATALOGO">
+									<h:outputText value="#{listaCatalogo.catNomeCatalogo}" id="idNomeCat" />
+								</p:column>
+								
+								<p:column headerText="IMAGEM">
+									<h:outputText value="#{listaCatalogo.catPhoto}" id="idPhoto" />
+								</p:column>
+	
+								
+	
+								<p:column style="width:32px;text-align: center">
+									<p:commandButton update="@form"  icon="ui-icon-search" title="View" >
+										<f:setPropertyActionListener value="#{listaCatalogo}" target="#{mb.selCatalogo}"  />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+				         </div>
+				     </div>
+				</div>
+		</section>
+		  <!-- LINHA 1 FORMULARIO PEDIDO CENTRAL -->
+		  <div class="container pedido">
+		  
+				
+		  
+		  
+		</div>
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Admin - Central</title>	
+	<link rel="shortcut icon" type="image/png" href="../resources/img/favicon2.png"/>
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="./resources/css/bootstrap.min.css" /> 
+    <link rel="stylesheet" type="text/css" href="./resources/css/primeCSS.css" /> 
+	<link rel="stylesheet" type="text/css" href="SITE/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="SITE/css/style.css" />
+
+</h:head>
+
+
+
+<h:body styleClass="bodyLogin" >
+	
+	<header class="main_header sticky">
+	  <div class="row">
+	    <div class="content"> 
+	    	<nav>
+		        <ul class="main_menu">
+		          <li><a href="SITE/index.jsp">Voltar para o site</a></li>                    
+		        </ul>
+	      	</nav>
+	    </div>
+	  </div> 
+	</header>
+
+	<ui:insert name="growl">
+		<p:growl id="messages" showDetail="true" life="6000" autoUpdate="true" /> 
+	</ui:insert>
+
+	<div class="container col-md-12" style="margin-top: 75px;">
+		<ui:insert name="pageTitle" />
+		<ui:insert name="contents" />
+	</div>
+
+  <!-- jQuery -->
+    <!-- <script src="./resources/js/jquery.js"></script> -->
+    <script src="./resources/js/jqueryTranslate.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./resources/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="./resources/js/jquery.easing.min.js"></script>
+    <script src="./resources/js/jquery.fittext.js"></script>
+    <script src="./resources/js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="./resources/js/creative.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(function(){
+			$.mask.addPlaceholder("~","[+-]");
+			$("#telefone").mask("(99) 9999-9999");
+			$("#form\\:telefone").mask("(99) 9999-9999"); 
+			$("#cep").mask("99999-999");
+			$("#data").mask("99/99/9999");
+			$("#cpf").mask("999.999.999-99");
+			$("#cnpj").mask("99.999.999/9999-99");
+		});
+		});
+
+	</script>
+	
+</h:body>
+</html>

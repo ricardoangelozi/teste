@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateBasClean.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{mensagensBean}" />
+	</ui:define>
+	
+	<ui:define name="contents">
+	<h:form id="form">
+		<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 Msgs">
+				    	<br/>	
+					    	<c:if test="#{mb.msg == 0}">
+					        	<h2 class="section-heading">NADA</h2>
+					        </c:if>				      
+					    	
+					    	<c:if test="#{mb.msg == 1}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>Pedido Efetuado!</h2>
+					        </c:if>
+							
+							<c:if test="#{mb.msg == 2}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>Solicitação Gravada!</h2>
+					        </c:if>
+							
+							<c:if test="#{mb.msg == 3}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>Já foi solicitado um catálogo para este CPF.<br> Para nova solicitação entrar em contato através do Fale Conosco.</br></h2>
+					        </c:if>
+							
+							<c:if test="#{mb.msg == 4}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>Documentos enviados com sucesso!</h2>
+					        </c:if>
+					        <c:if test="#{mb.msg == 5}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>CPF não cadastrado</h2>
+					        </c:if>
+					        <c:if test="#{mb.msg == 6}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>Não foi possivel efetuar a transação entre em contato através do Fale Conosco</h2>
+					        </c:if>
+					        <c:if test="#{mb.msg == 7}">
+					        	<h2 class="section-heading"><i class="fa fa-check-square MR" aria-hidden="true"></i>Documentos já aprovados !</h2>
+					        </c:if>														
+					        <br /><br />	
+					        <a class="submit_btn2" style="font-size:18px;"  href="SITE/index.jsp">Voltar a Navegação</a>	      				      				      				      
+						</div>
+					 </div>
+					 <div class="row">
+					 					 
+					 </div>
+				</div>
+		</section>
+		</h:form>
+		
+		
+		
+	</ui:define>
+</ui:composition>

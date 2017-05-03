@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	<f:view contentType="text/html; charset=UTF-8">
+<h:head>
+	<title>Central da Revendedora Sistema </title>	
+	<link rel="shortcut icon" type="image/png" href="../resources/img/favicon2.png"/>
+	<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/primeCSS2.css" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/styleClean.css" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/icons.css" />
+	
+</h:head>
+
+
+
+
+
+<h:body styleClass="bodyLogin" >
+
+<div id="preloader">
+      <div id="status"></div>
+</div>
+
+<header class="main_header sticky">
+  <div class="row">
+    	<a class="logo" href="../SITE/index.jsp"><img src="../SITE/img/logo.png" alt="" width="100%"/></a>
+      <div class="mobile-toggle"> <span></span> <span></span> <span></span></div>
+      <nav>
+      	<h:form>
+        <ul class="main_menu">
+          <h:outputText value="#{menuBean.labelMenu}" escape="false" />
+          <li><h:commandButton class="navbar-toggleSair" action="#{loginBean.doLogout}" value="Sair" /></li>
+        </ul>
+        </h:form> 
+      </nav>
+  </div>
+  <!-- END row --> 
+</header>
+
+	
+<ui:insert name="growl">
+	<p:growl id="messages" showDetail="true" life="3000" autoUpdate="true" />  
+</ui:insert>
+
+<div class="container col-md-12" style="margin-top: 75px;">
+	<ui:insert name="pageTitle" /> 
+	<ui:insert name="contents" />
+</div>
+
+<div class="clear"></div>
+
+<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>
+							<p:dialog modal="true" widgetVar="statusDialog" header="Aguarde..." draggable="false" closable="false">
+								<p:graphicImage library="img" name="preloader.gif" />
+							</p:dialog>		
+
+<!-- footerSistem area end   -->
+
+  <!-- jQuery -->
+    <!-- <script src="./resources/js/jquery.js"></script> -->
+    <script src="./resources/js/jqueryTranslate.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./resources/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="./resources/js/jquery.easing.min.js"></script>
+    <script src="./resources/js/jquery.fittext.js"></script>
+    <script src="./resources/js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="./resources/js/creative.js"></script>
+    
+    <!-- MAIN JS - menu toogle -->
+   	<script type="text/javascript" src="../SITE/js/main.js"></script>
+
+</h:body>
+</f:view>
+</html>

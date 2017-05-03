@@ -1,0 +1,234 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateBasClean.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroCatalogoBean}" />
+	</ui:define>
+
+	<ui:define name="contents">
+		<h:form id="form">
+
+			<div class="row">
+				<section id="cadastroEntregas">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="section-heading">Faça seu cadastro e seja uma Revendedora</h2>
+								<hr class="primary" />
+								<div class="subTitulo">
+								Efetue seu cadastro para realizar a solicitação de catálogo e fazer seus pedidos
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			</div>
+			<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+						<h4 class="formLine">Dados de cadastro</h4>
+					</div>
+
+					<div class="form-group row">
+						<label for="nome_completo" class="col-sm-2 form-control-label">Nome
+							Completo*</label>
+						<div class="col-sm-5">
+							<p:inputText id="nome_completo" value="#{mb.cadastro.nome}"
+								styleClass="form-control" required="true"
+								requiredMessage="Campo Nome Obrigatorio" />
+						</div>
+
+						<label for="email" class="col-sm-1 form-control-label">E-mail
+							*</label>
+						<div class="col-sm-4">
+							<p:inputText type="email" name="email" id="email" required="true"
+								requiredMessage="Campo Email Obrigatorio"
+								value="#{mb.cadastro.email}" styleClass="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="rg" class="col-sm-1 form-control-label">RG*</label>
+						<div class="col-sm-2">
+							<p:inputText type="text" name="rg" id="rg" maxlength="10"
+								styleClass="form-control" value="#{mb.cadastro.rg}"
+								required="true" requiredMessage="Campo RG Obrigatorio !" />
+						</div>
+
+						<label for="cpf" class="col-sm-1 form-control-label">CPF*</label>
+						<div class="col-sm-2">
+							<p:inputMask type="text" name="cpf" id="cpf"
+								styleClass="form-control" mask="999.999.999-99"
+								value="#{mb.cadastro.cpf}" required="true"
+								validator="#{validaCPF.validaCPF}"
+								requiredMessage="Preencha o campo CPF corretamente"
+								maxlength="14" />
+						</div>
+
+						<label for="sexo" class="col-sm-1 form-control-label">SEXO*</label>
+						<div class="col-sm-2">
+							<p:selectOneMenu id="sexo" value="#{mb.cadastro.sexo}"
+								styleClass="form-control" style="width:100%;" required="true"
+								requiredMessage="Campo SEXO Obrigatorio !">
+								<f:selectItem itemLabel="Escolha" itemValue=""
+									noSelectionOption="" />
+								<f:selectItem itemLabel="M" itemValue="M" />
+								<f:selectItem itemLabel="F" itemValue="F" />
+							</p:selectOneMenu>
+						</div>
+
+						<label for="dataNasc" class="col-sm-1 form-control-label">Data Nasc*</label>
+						<div class="col-sm-2">
+						
+						
+						<p:inputMask type="text" name="cpf" id="dataNasc"
+								styleClass="form-control" mask="99/99/9999"
+								value="#{mb.dataNascimento}" required="true"
+								maxlength="11" />
+						
+							<!--  <p:calendar locale="pt" id="dataNasc" value="#{mb.cadastro.nascimento}" pattern="dd/mm/yyyy" maxdate="01/01/2007" mindate="01/01/1950" yearRange="1950:+39" navigator="true" required="true"
+								requiredMessage="Campo  Data Nascimento Obrigatorio !" /> -->
+						</div>
+					</div>
+
+					<div class="row">
+						<h4 class="formLine">Telefones de cadastro</h4>
+					</div>
+
+					<div class="form-group row">
+						<label for="tel_res" class="col-sm-2 col-lg-2 form-control-label">Telefone
+							Residêncial*</label>
+						<div class="col-sm-2">
+							<p:inputMask id="tel_res" value="#{mb.cadastro.foneRes}"
+								mask="(99) 9999-9999" required="true"
+								requiredMessage="Campo Telefone Residencial Obrigatorio !" />
+						</div>
+
+						<label for="tel_com" class="col-sm-2 form-control-label">Telefone
+							Comercial</label>
+						<div class="col-sm-2">
+							<p:inputMask id="tel_com" value="#{mb.cadastro.foneCom}"
+								mask="(99) 9999-9999" />
+						</div>
+
+						<label for="tel_cel" class="col-sm-2 form-control-label">Telefone
+							Celular*</label>
+						<div class="col-sm-2">
+							<p:inputMask id="tel_cel" value="#{mb.cadastro.foneCel}"
+								mask="(99) 9.9999-9999" required="true"
+								requiredMessage="Campo Telefone Celular Obrigatorio !" />
+						</div>
+					</div>
+
+					<div class="row">
+						<h4 class="formLine">Endereço de cadastro</h4>
+					</div>
+
+					<div class="form-group row">
+						<label for="cep" class="col-sm-1 form-control-label">Cep
+							*</label>
+						<div class="col-sm-2">
+							<p:inputMask id="cep" mask="99999-999" styleClass="form-control"
+								value="#{mb.cadastro.cep}" required="true"
+								requiredMessage="Campo Cep Obrigatorio !" />
+						</div>
+
+						<label for="endereco" class="col-sm-1 form-control-label">Endereço*
+						</label>
+						<div class="col-sm-5	">
+							<p:inputText type="text" name="endereco" id="endereco"
+								styleClass="form-control" value="#{mb.cadastro.rua}"
+								required="true" requiredMessage="Campo Endereco Obrigatorio !" />
+						</div>
+
+						<label for="number" class="col-sm-1 form-control-label">Número*</label>
+						<div class="col-sm-2">
+							<p:inputText type="number" name="number" id="number"
+								styleClass="form-control" value="#{mb.cadastro.numero}"
+								required="true" requiredMessage="Campo Numero Obrigatorio !" />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="bairro" class="col-sm-1 form-control-label">Bairro*</label>
+						<div class="col-sm-2">
+							<p:inputText type="text" name="bairro" id="bairro"
+								styleClass="form-control" value="#{mb.cadastro.bairro}"
+								required="true" requiredMessage="Campo Bairro Obrigatorio !" />
+						</div>
+
+						<label for="cidade" class="col-sm-1 form-control-label">Cidade*</label>
+						<div class="col-sm-2">
+							<p:inputText type="text" name="cidade" id="cidade"
+								styleClass="form-control" value="#{mb.cadastro.cidade}"
+								required="true" requiredMessage="Campo Cidade Obrigatorio !" />
+						</div>
+
+						<label for="estado" class="col-sm-1 form-control-label">Estado*</label>
+						<div class="col-sm-2">
+							<p:inputText type="text" name="estado" id="estado"
+								styleClass="form-control" maxlength="2" value="#{mb.cadastro.estado}"
+								required="true" requiredMessage="Campo Estado Obrigatorio !" />
+						</div>
+
+						<label for="complemento" class="col-sm-1 form-control-label">Compl.</label>
+						<div class="col-sm-2">
+							<p:inputText type="text" name="complemento" id="complemento"
+								styleClass="form-control" value="#{mb.cadastro.complemento}" />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="referecia" class="col-sm-1 form-control-label">Referência</label>
+						<div class="col-sm-3">
+							<p:inputText type="text" name="referecia" id="referecia"
+								styleClass="form-control" value="#{mb.cadastro.referencia}" />
+						</div>
+					</div>
+
+					<div class="row">
+						<h4 class="formLine">Como conheceu a Central</h4>
+					</div>
+					<div class="form-group row">
+						<label for="conheceu" class="col-sm-2 form-control-label">Como conheceu a central?</label>
+						<div class="col-sm-2">
+							<p:selectOneMenu id="conheceu" value="#{mb.cadastro.conheceu}" styleClass="form-control" style="width:100%;">
+								<f:selectItem itemLabel="Escolha a forma" itemValue="" />
+								<f:selectItem itemLabel="Amigos" itemValue="Amigos" />
+								<f:selectItem itemLabel="Indicação" itemValue="Indicação" />
+								<f:selectItem itemLabel="Catálogo" itemValue="Catálogo" />
+								<f:selectItem itemLabel="Televisão" itemValue="Televisão" />
+								<f:selectItem itemLabel="Radio" itemValue="Radio" />
+								<f:selectItem itemLabel="Google" itemValue="Google" />
+								<f:selectItem itemLabel="Facebook" itemValue="Facebook" />
+								<f:selectItem itemLabel="Telefone" itemValue="Telefone" />
+								<f:selectItem itemLabel="Outros" itemValue="Outros" />
+							</p:selectOneMenu>
+						</div>
+
+						<label for="correnteEmail" class="col-sm-2 form-control-label">Deseja
+							receber e-mail?</label>
+						<div class="col-sm-2">
+							<input type="checkbox" name="correnteEmail" id="correnteEmail"
+								style="height: auto" value="#{mb.cadastro.newsletter}"
+								checked="checked" />
+						</div>
+					</div>
+
+					<div class="clean"></div>
+					<div class="alinhaBtn">
+						<h:commandButton value="Enviar Dados" action="#{mb.enviarDados(mb.cadastro)}"
+							styleClass="btnCentral" style="margin-bottom: 10px;" />
+					</div>
+				</div>
+			</section>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

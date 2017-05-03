@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateBasClean.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{uploderArquivosBean}" />
+	</ui:define>
+	
+	<ui:define name="contents">
+	<h:form id="form" prependId="false">
+		<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 ">
+				        	<h2 class="section-heading">Envie os documentos para a Central da Revendedora</h2>
+				            <hr class="primary" />
+				         </div>
+				         
+				         <div class="col-lg-12 ">
+				        	<h4 class="section-heading">Digite o cpf  </h4>
+				            <hr class="primary" />
+				         </div>
+				     </div>
+				</div>
+		</section>
+		
+		
+		  <!-- LINHA 1 FORMULARIO PEDIDO CENTRAL -->
+		  <div class="container pedido">
+		  
+				
+		  
+			  <div class="form1 row">
+			    <label for="cpf" class="col-sm-1 form-control-label">CPF*</label>
+			    <div class="col-sm-2">
+			    	
+			    	
+			    	<h:inputText type="text"  name="cpf2" id="cpf2"   styleClass="form-control"  value="#{mb.numeroCpf}" required="true" validator="#{validaCPFSemPontos.validaCPF}" requiredMessage="Preencha o campo CPF corretamente" maxlength="14"  />
+			    	
+			    </div>
+			    <div class="col-sm-2">
+			    	<h:commandButton value="Buscar"  styleClass="btnCentral" id="btnBuscarCpf"  action="#{mb.buscaCpf()}"/>
+			    	
+			    </div>
+			   </div>
+			
+		  
+		  
+		</div>
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

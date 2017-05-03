@@ -1,0 +1,38 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/template/templateBas.xhtml">
+	
+
+	<ui:define name="pageTitle"><c:set var="mb" value="#{loginBean}" /></ui:define>
+	
+	<ui:define name="contents" >
+		 <h:form>
+			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 loginMain">
+				<a class="logoLog" href="#">
+					<img src="SITE/img/logo.png" alt="Central da Revendedora" style="margin: 20px 0px 10px 0px;" />
+				</a>
+			</div>
+			
+			<div class="clear"></div>
+			
+			<div class="col-lg-12 text-center">
+				<div style="padding: 10px;">
+					<h:outputLabel value="Login" styleClass=""/><p:spacer width="10"/>
+					<h:inputText value="#{mb.usuario.dsLogin}" id="email" maxlength="40" size="20" required="true" requiredMessage="Campo Login Obrigatorio">
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</h:inputText> 
+					<br />
+					<h:outputLabel value="Senha" /><p:spacer width="5"/>
+					<h:inputSecret id="senha" value="#{mb.usuario.dsSenha}" maxlength="8" style="margin-bottom: 10px;"/>
+					<br />
+					<h:commandButton value="Entrar"	action="#{mb.doLoginMorador()}" styleClass="btn btn-default" style="margin-bottom: 10px;"/>
+					<br />
+				</div>
+			</div>
+		</h:form>		
+	</ui:define>
+</ui:composition>

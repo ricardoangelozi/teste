@@ -1,0 +1,312 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateSistema2.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroPedidoInternoBean}" />
+	</ui:define>
+	
+	<ui:define name="contents">
+	<h:form id="form">
+		<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 ">
+				        	<h2 class="section-heading">Inclusão de Pedidos pela Central</h2>
+				            <hr class="primary" />
+				            
+				            	<div class="subTitulo">Navegue entre os campos utilizando a tecla <span>"TAB"</span></div>
+				            
+				            
+				            	<c:if test="#{mb.habilitarSite == false}">
+				            		<div class="subTitulo">Digite  CPF  para efetuar o pedido </div>
+				            	</c:if>
+				            	
+				            
+				         </div>
+				     </div>
+				</div>
+		</section>
+		  <!-- LINHA 1 FORMULARIO PEDIDO CENTRAL -->
+		  <div class="container pedido">
+		  
+				
+		  <c:if test="#{mb.habilitarSite == false}">
+			  <div class="form-group row">
+			    <label for="cpf" class="col-sm-1 form-control-label">CPF*</label>
+			    <div class="col-sm-2">
+			    	<p:inputMask type="text"  name="cpf" id="cpf"  disabled="#{!mb.liberarCampos}" styleClass="form-control" mask="999.999.999-99" value="#{mb.cadastro.cpf}" required="true" validator="#{validaCPF.validaCPF}" requiredMessage="Preencha o campo CPF corretamente" maxlength="14"/>
+			    </div>
+			    <div class="col-sm-2">
+			    	<p:commandButton value="Buscar"  styleClass="btnCentral" id="btnBuscarCpf" ajax="true" actionListener="#{mb.buscaCpf()}" update="@form"  rendered="#{mb.liberarCampos}" />
+			    </div>
+			   </div>
+		   </c:if>
+		  <c:if test="#{!mb.liberarCampos == true}">
+		  
+		  	<div class="row">
+				<h4 class="formLine">Dados Pessoais</h4>
+			</div>
+			
+			
+			<div class="row">
+				<div class="column column-6">
+					<label style="width: 100%">Nome Completo *</label>
+					<p:inputText id="nome_completo" disabled="#{mb.liberarCampos}" value="#{mb.cadastro.nome}" styleClass="form-control" required="true" requiredMessage="Campo Nome Obrigatorio !" />
+				</div>
+				<div class="column column-4">
+					<label style="width: 100%">E-mail *</label>
+					<p:inputText type="email" name="email" id="email" disabled="#{mb.liberarCampos}" value="#{mb.cadastro.email}" styleClass="form-control"  required="true" requiredMessage="Campo Email Obrigatorio !"/>
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Data de Nascimento*</label>
+					<p:calendar locale="pt" id="dataNasc" disabled="#{mb.liberarCampos}" value="#{mb.cadastro.nascimento}" pattern="dd/mm/yyyy"  maxdate="01/01/2007" mindate="01/01/1950" yearRange="1950:+39" navigator="true" required="true" requiredMessage="Campo  Data Nascimento Obrigatorio !"  />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="column column-4">
+					<label style="width: 100%">RG *</label>
+					<p:inputText type="text" name="rg" id="rg" disabled="#{mb.liberarCampos}" maxlength="10" styleClass="form-control"  value="#{mb.cadastro.rg}" required="true" requiredMessage="Campo RG Obrigatorio !"/>
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Sexo *</label>
+					<p:selectOneMenu id="sexo" value="#{mb.cadastro.sexo}" disabled="#{mb.liberarCampos}" styleClass="form-control" required="true" requiredMessage="Campo SEXO Obrigatorio !">
+	      				<f:selectItem itemLabel="Escolha" itemValue="" noSelectionOption="" />
+	        			<f:selectItem itemLabel="M" itemValue="M" />
+	        			<f:selectItem itemLabel="F" itemValue="F" />
+	      			</p:selectOneMenu>
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Telefone Celular*</label>
+					<p:inputMask id="tel_cel" value="#{mb.cadastro.foneCel}" disabled="#{mb.liberarCampos}" mask="(99) 9.9999-9999"  required="true" requiredMessage="Campo Tel Celular Obrigatorio !"/>
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Telefone Residêncial</label>
+					<p:inputMask id="tel_res" value="#{mb.cadastro.foneRes}" disabled="#{mb.liberarCampos}" mask="(99) 9999-9999" />
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Telefone Comercial</label>
+					<p:inputMask id="tel_com" value="#{mb.cadastro.foneCom}" disabled="#{mb.liberarCampos}" mask="(99) 9999-9999" />
+				</div>
+			</div>
+			
+			
+			
+			
+		  
+		  	<section id="cadastroEntregas">
+				<div class="row">
+			        <h4 class="formLine">Dados de Endereço</h4>
+			    </div>
+			</section>
+			
+			
+		
+			<div class="row">
+		  		<div class="column column-3">
+					<label style="width: 100%">Cep*</label>
+					<p:inputMask id="cep" mask="99999-999" disabled="#{mb.liberarCampos}" styleClass="form-control" value="#{mb.cadastro.cep}"  required="true" requiredMessage="Campo CEP Obrigatorio !"/>
+				</div>
+				<div class="column column-6">
+					<label style="width: 100%">Endereço*</label>
+					<p:inputText type="text" name="endereco" disabled="#{mb.liberarCampos}" id="endereco"  styleClass="form-control" value="#{mb.cadastro.rua}"  required="true" requiredMessage="Campo Endereço Celular Obrigatorio !"/>
+				</div>
+				<div class="column column-1">
+					<label style="width: 100%">Número*</label>
+					<p:inputText  name="number" disabled="#{mb.liberarCampos}" id="number"  styleClass="form-control" value="#{mb.cadastro.numero}"  maxlength="5" required="true" requiredMessage="Campo Numero Obrigatorio !"/>
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Bairro*</label>
+					<p:inputText type="text" name="bairro" disabled="#{mb.liberarCampos}" id="bairro" styleClass="form-control" value="#{mb.cadastro.bairro}"  required="true" requiredMessage="Campo Bairro Obrigatorio !"/>
+				</div>
+			</div>
+			
+			<div class="row">
+		  		<div class="column column-2">
+					<label style="width: 100%">Cidade*</label>
+					<p:inputText type="text" name="cidade" disabled="#{mb.liberarCampos}" id="cidade" styleClass="form-control" value="#{mb.cadastro.cidade}"  required="true" requiredMessage="Campo Cidade Obrigatorio !"/>
+				</div>
+				<div class="column column-1">
+					<label style="width: 100%">Estado*</label>
+					<p:inputText type="text" name="estado" disabled="#{mb.liberarCampos}" id="estado" styleClass="form-control"  value="#{mb.cadastro.estado}"  required="true" requiredMessage="Campo Estado Obrigatorio !"/>
+				</div>
+				<div class="column column-2">
+					<label style="width: 100%">Complemento*</label>
+					<p:inputText type="text" name="complemento" disabled="#{mb.liberarCampos}" id="complemento" styleClass="form-control" value="#{mb.cadastro.complemento}"/>
+				</div>
+				<div class="column column-3">
+					<label style="width: 100%">Referencia*</label>
+					<p:inputText type="text" name="referecia" disabled="#{mb.liberarCampos}" id="referecia" styleClass="form-control" value="#{mb.cadastro.referencia}" />
+				</div>
+				<div class="column column-4">
+					<label style="width: 100%">Como conheceu a central</label>
+					<p:selectOneMenu id="conheceu" disabled="#{mb.liberarCampos}" value="#{mb.cadastro.conheceu}" styleClass="form-control" style="width:100%;">
+			             <f:selectItem itemLabel="Escolha a forma" itemValue="" />
+			            <f:selectItem itemLabel="Amigos" itemValue="Amigos" />
+			            <f:selectItem itemLabel="Indicação" itemValue="Indicação" />
+			            <f:selectItem itemLabel="Catálogo" itemValue="Catálogo" />
+			            <f:selectItem itemLabel="Televisão" itemValue="Televisão" />
+			            <f:selectItem itemLabel="Radio" itemValue="Radio" />
+			            <f:selectItem itemLabel="Google" itemValue="Google" />
+			            <f:selectItem itemLabel="Facebook" itemValue="Facebook" />
+			            <f:selectItem itemLabel="Telefone" itemValue="Telefone" />
+			            <f:selectItem itemLabel="Outros" itemValue="Outros" />
+			        </p:selectOneMenu>
+				</div>
+			</div>
+				
+		
+		  	<div class="row">
+				<h4 class="formLine">Dados do Pedido</h4>
+			</div>
+			
+			<div class="row">
+		  		<div class="column column-2">
+					<label style="width: 100%">Referência</label>
+					<p:inputText  disabled="#{mb.liberarCampos}" name="referencia" id="referencia" value="#{mb.pedido.proref}" maxlength="8"/>
+				</div>
+				<div class="column2 column2-2">
+					<p:commandButton value="Buscar" styleClass="btnCentral" id="btnBuscar" ajax="true" actionListener="#{mb.buscaIten}" update="@([id$=qtdPedido],[id$=taman],[id$=selTamanho],[id$=descricao],[id$=pag],[id$=preco],[id$=btnAddLista])"  style="margin-top: 10px;" />
+				</div>
+				<div class="column column-3">
+				<label style="width: 100%">QTD</label>
+					<p:inputText   name="qtdPedido" id="qtdPedido" value="#{mb.pedido.qtdItens}" maxlength="2" disabled="#{mb.liberarCampos}"/>
+				</div>
+				
+				<div class="column column-3">
+				<label style="width: 100%">TAM</label>
+					<p:inputText  name="taman" id="taman" value="#{mb.pedido.protam}"  maxlength="2" disabled="true"/>
+				</div>
+				
+				<div class="column column-2">
+					<p:selectOneMenu id="selTamanho" name="selTamanho" styleClass="form-control" value="#{mb.pedido.protam}" >
+						<f:selectItems value="#{mb.tamanho}"/> 
+					</p:selectOneMenu>
+				</div>
+			</div>
+			
+			<div class="row">
+		  		<div class="column column-3">
+					<label style="width: 100%">Descrição</label>
+					<p:inputText type="text" name="descricao" id="descricao" value="#{mb.pedido.prodescri}" maxlength="70" disabled="true" title="#{mb.pedido.prodescri}"  />
+				</div>
+				<div class="column column-3">
+				<label style="width: 100%">Pág</label>
+					<p:inputText  name="pag" id="pag" value="#{mb.pedido.propag}" maxlength="3"  disabled="true"/>
+				</div>
+				<div class="column column-3">
+				<label style="width: 100%">Valor da Unidade</label>
+					<p:inputText type="text" name="preco" id="preco" value="#{mb.pedido.propreuni1}" maxlength="8" disabled="true"/>
+				</div>
+				
+				<div class="column2 column2-3" style="margin-top: 10px;">
+					<p:commandButton value="Incluir Item" id="btnAddLista" ajax="true" actionListener="#{mb.adicionarItemLista}"  update="@([id$=qtdPedido],[id$=taman],[id$=selTamanho],[id$=descricao],[id$=pag],[id$=preco],[id$=btnAddLista],[id$=valorTotal],[id$=qtdTotalItens],[id$=pedidosHiro],[id$=pedidosPra])" styleClass="btnCentral" />
+				</div>
+			</div>
+		
+		
+		<section id="cadastroEntregas">
+			
+					<div class="column2 column2-12 tabela" style="border-top:1px solid #ccc; padding-top: 15px;">
+						  <p:dataTable id="pedidosHiro" var="var" value="#{mb.listaPedidosHiro}"  widgetVar="cellCars" styleClass="table" rendered="#{!mb.liberarCampos}" >
+						       
+						       <f:facet name="header">Itens Hiroshima</f:facet>
+						       		<p:column headerText="QTD">
+        								<h:outputText value="#{var.qtdItens}" />
+    								</p:column>
+						       
+							       <p:column headerText="Referencia">
+        								<h:outputText value="#{var.proref}" />
+    								</p:column>
+						 
+						 			<p:column headerText="Tamanho">
+						               <h:outputText value="#{var.protam}" />
+						           </p:column>
+						 
+						 			<p:column headerText="Descrição">
+						               <h:outputText value="#{var.prodescri}" />
+						           </p:column>
+						           
+						           <p:column headerText="Pagina">
+						               <h:outputText value="#{var.propag}" />
+						           </p:column>
+						           
+						           <p:column headerText="Preco UNI.">
+						               <h:outputText value="#{var.propreuni1}" />
+						           </p:column>
+						           
+						           <p:column headerText="Qtde X Preço">
+						               <h:outputText value="#{var.valorTotalItens}" />
+						           </p:column>
+						           
+
+						           
+						           <p:column headerText="Excluir">
+						           		<p:commandButton value="remover" id="btnRemoverLista" ajax="true"  actionListener="#{mb.removerItemListaHiro(var)}" update="@([id$=pedidosHiro],[id$=valorTotal],[id$=qtdTotalItens])"  />
+						           </p:column>
+						           
+						 </p:dataTable>
+						 
+						 
+						 <p:dataTable id="pedidosPra" var="lisPra" value="#{mb.listaPedidosPravc}"  widgetVar="cellCars" styleClass="table" rendered="#{!mb.liberarCampos}" >
+						       
+						       <f:facet name="header">
+						           Itens Pra Você
+						       </f:facet>
+						       		<p:column headerText="QTD">
+        								<h:outputText value="#{lisPra.qtdItens}" />
+    								</p:column>
+						       
+							       <p:column headerText="Referencia">
+        								<h:outputText value="#{lisPra.proref}" />
+    								</p:column>
+						 
+						 			<p:column headerText="Tamanho">
+						               <h:outputText value="#{lisPra.protam}" />
+						           </p:column>
+						 
+						 			<p:column headerText="Descrição">
+						               <h:outputText value="#{lisPra.prodescri}" />
+						           </p:column>
+						           
+						           <p:column headerText="Pagina">
+						               <h:outputText value="#{lisPra.propag}" />
+						           </p:column>
+						           
+						           <p:column headerText="Preco UNI.">
+						               <h:outputText value="#{lisPra.propreuni1}" />
+						           </p:column>
+						           
+						           <p:column headerText="Qtde X Preço">
+						               <h:outputText value="#{lisPra.valorTotalItens}" />
+						           </p:column>
+						           
+						           <p:column headerText="Excluir">
+						           		<p:commandButton value="remover" id="btnRemoverLista" ajax="true"  actionListener="#{mb.removerItemListaPra(lisPra)}" update="@([id$=pedidosPra],[id$=valorTotal],[id$=qtdTotalItens])" />
+						           </p:column>
+						           
+						 </p:dataTable>
+						  
+						     <div class="baixoForm">
+						     <div class="col-sm-6"><tt>Valor Total: </tt><h:outputText id="valorTotal" value="#{mb.valorTotal}" /></div>
+						     <div class="col-sm-6"><tt>Quantidade Total Itens: </tt><h:outputText id="qtdTotalItens" value="#{mb.qtdTotalItens}" /></div>
+						     </div>
+						  
+					</div>
+					<div class="clean"></div>
+					<div class="alinhaBtn"><p:commandButton rendered="#{!mb.liberarCampos}" id="btnEnviarDados" value="Enviar Dados" disabled="#{mb.liberarCampos}" actionListener="#{mb.enviarDados(mb.cadastro)}" styleClass="btnCentral" style="margin-bottom: 10px;" update="@form" /></div>
+					
+				
+		</section>
+		</c:if>
+		</div>
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<h:messages/>
+		
+		<h3>#{msgs.dogUpdateHeader}: #{dogMB.dog.name}</h3>
+		<h:inputHidden value="#{dogMB.dog.id}" />
+		<h:panelGrid columns="2" styleClass="panelGrid" rowClasses="panelFirstLine,panelNextLine" >
+			<h:outputLabel for="dogName" value="#{msgs.dogName}" />
+			<h:inputText id="dogName" value="#{dogMB.dog.name}" required="true" requiredMessage="#{msgs.dogNameRequired}" />
+			
+			<h:outputLabel for="dogWeight" value="#{msgs.dogWeight}" />
+			<h:inputText id="dogWeight" value="#{dogMB.dog.weight}" required="true" requiredMessage="#{msgs.dogWeightRequired}" >
+				<f:convertNumber />
+			</h:inputText>
+		</h:panelGrid>
+		<h:panelGrid columns="2">
+			<h:commandButton action="#{dogMB.updateDogEnd()}" value="#{msgs.update}" />
+			<h:commandButton action="#{dogMB.listAllDogs()}" value="#{msgs.cancel}" immediate="true" />
+		</h:panelGrid>
+		<br/>
+	</h:form>
+</h:body>
+</html>

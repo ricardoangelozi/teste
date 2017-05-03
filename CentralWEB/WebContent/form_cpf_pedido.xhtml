@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateBasClean.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{cadastroPedidoBean}" />
+	</ui:define>
+	
+	<ui:define name="contents">
+	<h:form id="form">
+		<section id="cadastroEntregas">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 ">
+				        	<h2 class="section-heading">Faça seu pedido</h2>
+				            <hr class="primary" />
+				            	<div class="subTitulo">Digite  CPF  para efetuar o pedido </div>
+				         </div>
+				     </div>
+				</div>
+		</section>
+		
+		
+		  <!-- LINHA 1 FORMULARIO PEDIDO CENTRAL -->
+		  <div class="container pedido">
+		  
+			  <div class="form-group row">
+			    <label for="cpf" class="col-sm-1 form-control-label">CPF3*</label>
+			    <div class="col-sm-2">
+			    	<p:inputMask type="text"  name="cpf" id="cpf"   styleClass="form-control" mask="999.999.999-99" value="#{mb.nrCpf}" required="true" validator="#{validaCPF.validaCPF}" requiredMessage="Preencha o campo CPF corretamente" maxlength="14"/>
+			    </div>
+			    <div class="col-sm-2">
+			    	<h:commandButton value="Buscar"  styleClass="btnCentral" id="btnBuscarCpf" action="#{mb.buscaCpf()}" />
+			    </div>
+			   </div>
+		  
+		</div>
+		
+		
+		<div class="container pedido">
+		  
+			  <div class="form-group row">
+			    <div class="col-sm-2">
+				<h:link outcome="/form_hiroshima_pedido.xhtml"  value="Já sou Revendedora"></h:link>
+			    
+				</div>
+			    
+			    
+			   </div>
+		  
+		</div>
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

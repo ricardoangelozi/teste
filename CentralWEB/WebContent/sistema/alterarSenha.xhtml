@@ -1,0 +1,62 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/template/templateSistema2.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{alterarSenha}" />
+	</ui:define>
+	
+	<ui:define name="contents" >
+	
+		<h:form id="formAlterarSenha">
+		
+			<section id="cadastroFestas">
+				<div class="container">
+					<div class="row">
+				    	<div class="col-lg-12 text-center">
+				        	<h2 class="section-heading">Alterar Senha</h2>
+				            <hr class="primary" />
+				         </div>
+				     </div>
+				</div>
+			</section>
+			
+			<section id="cadastroFestas">
+				<div class="container">
+					<div class="row">
+						<div class="column2 column2-3">
+							<label style="width: 100%">Login:</label>
+							<h:inputText value="#{mb.usuario.dsLogin}" id="email"  maxlength="40" size="20" styleClass="inpt01" disabled="true"/>
+						</div>
+						<div class="column2 column2-3">
+							<label style="width: 100%">Senha Atual: </label>
+							<h:inputSecret id="senha" value="#{mb.senhaAtual}" maxlength="8" styleClass="inpt01"/>
+	
+						</div>
+						<div class="column2 column2-3">
+							<label style="width: 100%">Nova Senha:</label>
+							<h:inputSecret id="novaSenha" value="#{mb.novaSenha}" maxlength="8" styleClass="inpt01"/>
+						</div>
+						
+						<div class="column2 column2-3">
+							<label style="width: 100%">Confirma Nova Senha:</label>
+							<h:inputSecret id="confirmaSenha" value="#{mb.novaSenhaConfirma}" maxlength="8" styleClass="inpt01"/>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="column2 column2-12">
+							<h:commandButton value="Alterar" styleClass="btnCentral" action="#{mb.alterarSenha()}" />
+						</div>
+					</div>
+					 
+				</div>
+			</section>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

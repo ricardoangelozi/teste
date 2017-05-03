@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templateSistema.xhtml">
+
+	<ui:define name="pageTitle">
+		<c:set var="mb" value="#{PainelCentralBean}" />
+	</ui:define>
+
+
+	<ui:define name="contents">
+		<h:form id="form">
+
+			<section id="cadastroEntregas">
+				<div class="row">
+					<div class="column2 column2-12">
+						<h2 class="section-heading">Painel Central</h2>
+						<hr class="primary" />
+					</div>
+				</div>
+			</section>
+
+
+			<section id="painelCentral">
+		
+			<div class="row">       
+				<div class="column2 column-12">
+					<label style="width: 100%; font-size: 20px; text-transform: uppercase;">Status</label>
+				</div>
+			</div>
+			
+			<div class="row">       
+				<div class="column column-4">
+					<label style="width: 100%">Cadastros em aberto no site</label>
+					<h:outputLabel value="#{mb.qtdSiteCatalogo}" />
+				</div>
+				<div class="column column-4">
+					<label style="width: 100%">Pedidos em aberto no site</label>
+					<h:outputLabel value="#{mb.qtdSitePedido}"></h:outputLabel>
+				</div>
+				<div class="column column-4">
+					<label style="width: 100%">Catálogos Enviados</label>
+					<h:outputLabel value="#{mb.qtdCatalogoEnviados}"></h:outputLabel>
+				</div>
+			</div>
+		
+			</section>
+		</h:form>
+	</ui:define>
+</ui:composition>
